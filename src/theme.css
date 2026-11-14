@@ -1,0 +1,102 @@
+/* Cloud Rain for T3 Code.
+   build.py minifies this file and swaps the placeholders for embedded images:
+   __CLOUDS__  pixel-art cloudscape (assets/clouds.png)
+   __RAIN__    tile of falling digit streaks (src/rain.py)
+   __TEXTURE__ faint grid of digits over the whole sky (src/rain.py) */
+
+.dark {
+  --a: url(__CLOUDS__);
+  --r: url("__RAIN__");
+  --x: url("__TEXTURE__");
+}
+
+/* The sky sits behind the whole window. */
+.dark [data-slot=sidebar-wrapper] {
+  background: #040828;
+  isolation: isolate;
+}
+
+.dark [data-slot=sidebar-wrapper]::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: var(--x), var(--a) center/cover no-repeat;
+  image-rendering: pixelated;
+}
+
+/* Rain: one tile 480x960 that slides down a cell (12px) at a time.
+   A stepped transform runs on the compositor, so it stays cheap. */
+.dark [data-slot=sidebar-wrapper]::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: -960px;
+  height: calc(100vh + 960px);
+  z-index: -1;
+  pointer-events: none;
+  background: var(--r);
+  animation: cr 11s steps(80) infinite;
+  will-change: transform;
+}
+
+@keyframes cr {
+  to { transform: translateY(960px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dark [data-slot=sidebar-wrapper]::after { animation: none; }
+}
+
+/* Let the sky show through the app. A conversation gets a dark veil for reading. */
+.dark [data-chat-canvas] {
+  background: #0000 !important;
+}
+
+.dark [data-chat-canvas]:has(.messages-timeline-scroll) {
+  background: #030620c4 !important;
+}
+
+.dark [data-slot=sidebar-inset],
+.dark [data-slot=sidebar-inset] > div,
+.dark [data-chat-canvas] [data-workspace-area=conversation],
+.dark [data-chat-canvas] [data-timeline-loading],
+.dark [data-chat-canvas] .messages-timeline-scroll,
+.dark [data-chat-canvas] [data-chat-composer-form],
+.dark [data-settings-page-scroll] {
+  background-color: #0000 !important;
+  background-image: none !important;
+}
+
+/* No blur on the sidebar: blurring over the moving rain costs a redraw every step. */
+.dark [data-slot=sidebar-inner] {
+  background: #040828e0 !important;
+  backdrop-filter: none !important;
+}
+
+.dark [data-chat-header] {
+  background: #030620cc !important;
+}
+
+.dark [data-chat-column]:not(:has(.messages-timeline-scroll)) [data-chat-header] {
+  background: #0000 !important;
+}
+
+.dark [data-user-message-bubble] {
+  background: linear-gradient(90deg, #6f86ff40, #6f86ff0d), #0a1240b8 !important;
+  box-shadow: inset 0 1px 0 #ffffff12 !important;
+  border-radius: 14px !important;
+}
+
+.dark [data-slot=popover-popup],
+.dark [data-slot=menu-popup] {
+  background: #0a1236f2 !important;
+  border-color: #aebcff24 !important;
+}
+
+.dark [data-thread-item] [aria-current=page] {
+  background: linear-gradient(90deg, #6f86ff47, #6f86ff00) !important;
+  border-radius: 10px !important;
+}
