@@ -50,11 +50,12 @@
   .dark [data-slot=sidebar-wrapper]::after { animation: none; }
 }
 
-/* Let the sky show through the app. A conversation gets a dark veil for reading. */
+/* Keep the sky visible behind a dark veil on both new and active conversations. */
 .dark [data-chat-canvas] {
   background: #0000 !important;
 }
 
+.dark [data-chat-canvas]:not(:has(.messages-timeline-scroll)),
 .dark [data-chat-canvas]:has(.messages-timeline-scroll) {
   background: #030620df !important;
 }
