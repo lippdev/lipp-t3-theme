@@ -37,6 +37,7 @@ COLORS = {
     "secondaryLabel": "#a3acd6",
     "sidebarMutedForeground": "#9aa4d0",
     "sidebarControlSurface": "#040828",
+    "sidebarRowHover": "#16225e",
     "update": "#8fa2ff",
     "updateSurface": "#14205a",
     "codeBackground": "#050a2a",
