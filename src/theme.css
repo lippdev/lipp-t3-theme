@@ -50,12 +50,11 @@
   .dark [data-slot=sidebar-wrapper]::after { animation: none; }
 }
 
-/* Keep the sky visible behind a dark veil on both new and active conversations. */
+/* Keep the sky visible, with a dark veil behind active conversations. */
 .dark [data-chat-canvas] {
   background: #0000 !important;
 }
 
-.dark [data-chat-canvas]:not(:has(.messages-timeline-scroll)),
 .dark [data-chat-canvas]:has(.messages-timeline-scroll) {
   background: #030620df !important;
 }
@@ -69,6 +68,12 @@
 .dark [data-settings-page-scroll] {
   background-color: #0000 !important;
   background-image: none !important;
+}
+
+/* Darken only the composer on the new-conversation screen. */
+.dark [data-chat-canvas]:not(:has(.messages-timeline-scroll)) [data-chat-composer-form] {
+  background-color: #030620df !important;
+  border-radius: 14px;
 }
 
 /* No blur on the sidebar: blurring over the moving rain costs a redraw every step. */
