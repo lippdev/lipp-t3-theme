@@ -56,7 +56,7 @@
 }
 
 .dark [data-chat-canvas]:has(.messages-timeline-scroll) {
-  background: #030620c4 !important;
+  background: #030620df !important;
 }
 
 .dark [data-slot=sidebar-inset],
