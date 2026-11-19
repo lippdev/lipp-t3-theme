@@ -6,14 +6,28 @@ Um tema para o [T3 Code](https://t3.codes). O fundo é um céu noturno de nuvens
 
 *A imagem mostra só o fundo, sem a interface do T3.*
 
+## Versões
+
+- **Cloud Rain**: a versão original em azul-marinho.
+- **Cloud Rain Preto**: interface em preto e cinza, fundo em tons de cinza, sidebar desfocada e chat centralizado, com caixas de mensagem que facilitam a leitura.
+
 ## Instalar
+
+Para instalar a versão original:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/lippdev/lipp-t3-theme/main/cloud-rain.json -o cloud-rain.json
 t3 theme set cloud-rain.json
 ```
 
-O T3 troca para o Cloud Rain na hora, no app desktop e no navegador. Para voltar, escolha outro tema no seletor de temas ou rode `t3 theme set t3-chat`.
+Para instalar a versão preta:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/lippdev/lipp-t3-theme/main/cloud-rain-preto.json -o cloud-rain-preto.json
+t3 theme set cloud-rain-preto.json
+```
+
+O T3 troca para o tema escolhido na hora, no app desktop e no navegador. Para voltar, escolha outro tema no seletor de temas ou rode `t3 theme set t3-chat`.
 
 ### Pedir para o agente instalar
 
@@ -23,9 +37,9 @@ Cole isto numa conversa do T3 Code:
 
 ### Instruções para agentes
 
-1. Baixe `https://raw.githubusercontent.com/lippdev/lipp-t3-theme/main/cloud-rain.json`.
-2. Se o comando `t3` estiver disponível, rode `t3 theme set <caminho do cloud-rain.json>`.
-3. Se não estiver, chame a ferramenta `t3_theme_set` com `themeId: "cloud-rain"` e o JSON do arquivo como `theme`.
+1. Baixe `https://raw.githubusercontent.com/lippdev/lipp-t3-theme/main/cloud-rain.json` ou `https://raw.githubusercontent.com/lippdev/lipp-t3-theme/main/cloud-rain-preto.json`, conforme a versão desejada.
+2. Se o comando `t3` estiver disponível, rode `t3 theme set <caminho do arquivo baixado>`.
+3. Se não estiver, chame a ferramenta `t3_theme_set` com o `themeId` correspondente (`cloud-rain` ou `cloud-rain-preto`) e o JSON do arquivo como `theme`.
 4. Não edite o arquivo. As imagens do céu e da chuva estão embutidas no CSS, e um caractere errado faz elas sumirem.
 
 ## Requisitos
@@ -36,12 +50,14 @@ Cole isto numa conversa do T3 Code:
 ## Notas
 
 - O tema é só escuro.
-- A chuva anda uma célula de cada vez, com uma animação que roda na placa de vídeo, então pesa pouco. A barra lateral fica sem desfoque de propósito: desfocar por cima da chuva redesenharia tudo a cada passo.
+- A chuva anda uma célula de cada vez, com uma animação que roda na placa de vídeo, então pesa pouco. Na versão original, a barra lateral não tem desfoque. A versão preta usa desfoque, que pode exigir mais da renderização enquanto a chuva se move.
 - Com "reduzir movimento" ligado no sistema, a chuva para.
 - O padrão da chuva se repete a cada 480 px na horizontal.
 - O fundo usa partes internas do layout do T3. Se uma atualização mudar esse layout, o céu pode voltar ao fundo liso do T3. O resto continua funcionando.
 
 ## Mudar o tema
+
+O processo de build abaixo gera a versão original. `cloud-rain-preto.json` é uma variante adicional independente e não é gerada por esse processo.
 
 | Arquivo | O que controla |
 |---|---|
